@@ -1,4 +1,4 @@
-#Phase1: Configure a the CC Network and the Proxy
+# Phase1: Configure a the CC Network and the Proxy
 
 This part follows what stated in https://docs.confluent.io/cloud/current/networking/ccloud-console-access.html.
 In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
