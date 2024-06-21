@@ -1,4 +1,4 @@
-# Confluent demo: 
+# Confluent demo: ---- WORK IN PROGRESS!! ---------
 # Using Fully managed connector with AWS private networking, for dummies.
 Here we are going to take advantage of fully managed connector using a Private Link connection.
 
