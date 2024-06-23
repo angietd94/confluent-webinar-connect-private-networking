@@ -75,8 +75,12 @@ Then closing the text editor:
 sudo systemctl restart nginx
 sudo systemctl status nginx
 ```
-Now we need a final step but we will do it later!
+This is what we expect to see:
 
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/28276f3754ab5380ce86fa051b2847b8343a7f72/images/nginx_working.png)
+
+Now we need a final step but we will do it later...
+____
 
 - [AWS-VPC]
   - Setup PrivateLink in AWS
