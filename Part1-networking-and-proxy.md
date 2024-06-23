@@ -68,7 +68,8 @@ _**Private Hosted Zones**: These are used for internal DNS resolution within you
 _**Public Hosted Zones**: These are used for DNS resolution that is accessible from the public internet. They resolve domain names to public IP addresses that can be accessed globally. This is typically used for websites, APIs, and other services that need to be publicly available_
 
 ____
- - **Setup EC2 Instance as Bastion Host with NGINX**: Launch an EC2 Instance in AWS, configured as a bastion host. Install NGINX on this instance to act as a proxy gateway. NGINX will facilitate secure communication between your local machine and Confluent Cloud through the PrivateLink. You can connect to this EC2 in various forms, either from the connect button in the AWS UI, of if you have a keypair with SSH (in this case, please remember to check Security groups port 443).
+ - **Setup EC2 Instance as Bastion Host with NGINX**: Launch an EC2 Instance in AWS, configured as a bastion host. Install NGINX on this instance to act as a proxy gateway. NGINX will facilitate secure communication between your local machine and Confluent Cloud through the PrivateLink. You can connect to this EC2 in various forms, either from the connect button in the AWS UI, of if you have a keypair with SSH (in this case, please remember to check Security groups port 443). Important: Select for the EC2 to have a Public IP because we will need this.
+ - Choose wether Amazon Linux or Ubuntu. In Amazon Linux is like a CentOs and Ubuntu is Linux so some commands may differ! But there is Google for that ;) 
 - [**<span style="color:orange">AWS-EC2</span>**] Setup NGINX Proxy on EC2 Instance: This will act as a gateway for your local machine to connect to Confluent Cloud through the PrivateLink.
 
 ```
