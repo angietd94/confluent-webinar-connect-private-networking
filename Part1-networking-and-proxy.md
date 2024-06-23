@@ -69,7 +69,7 @@ stream {
 ```
 It will look like this more or less:
 
-![Screenshot] ( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/nginx_conf.png )
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/nginx_conf.png )
 Then closing the text editor:
 ```
 sudo systemctl restart nginx
@@ -137,9 +137,9 @@ _**Public Hosted Zones**: These are used for DNS resolution that is accessible f
 In this way.
 
 
-![Screenshot] ( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/code_hosts.png)
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/code_hosts.png)
 
 Ta-daaaan. You will be able to see your topics from your browser. That's amazing.
 
 
-![Screenshot] (https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/Topics_visible.png)
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/ea7dab092189c44c963d1a579029ddbdb3b3f197/images/Topics_visible.png)
