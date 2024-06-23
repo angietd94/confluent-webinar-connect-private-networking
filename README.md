@@ -21,6 +21,10 @@ If you want to have more documentation please open https://docs.confluent.io/clo
 ## Phase 1: We will mount the proxy with NGINX
 Some theory: as the Dedicated cluster is inside a VPC (private), if you want to see anything from your UI, from your browser, you need to actually create some proxy to reach that. And this is what all this part is about.
 - https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/main/Part1-networking-and-proxy.md
+
+- ![Screenshot of the setup]([https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/main/images/Connect%20to%20dedicated%20PL.png?raw=true))
+
+
 ## Phase 2: We will mount the actual connect demo
 - https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/main/Part2-connectors-demo.md 
 
