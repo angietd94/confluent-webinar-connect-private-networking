@@ -4,8 +4,12 @@ This part follows what stated in https://docs.confluent.io/cloud/current/network
 In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
 - [**<span style="color:orange">AWS</span>**]  
   - Create a new VPC if you want to start from scratch. I will strongly suggest you the enhanced creationn setting because in this way it will create all the possible private and public subnets with Internet Gateway with Route Table automatically.
+ I strongly suggest you to create VPC this way in order to have all subnet and the Internet Gateway already created.
+  ![Screenshot]((https://github.com/angietd94/confluent-webinar-connect-private networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png)
 - [**Confluent Cloud**]
   - Inside an environment, create a new network in the region that you want. Select Private Link as networking type.
+ 
+ ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_new_network.png)
   - Create inside your CC VPC, a PrivateLink Access. Save that com.amazonaws.vpce.<region>.xxxxxx name for later. It will take time.
   - Create a Dedicated Cluster inside that CC VPC.
 - [**<span style="color:orange">AWS</span>**]
@@ -107,3 +111,6 @@ Zonal endpoint record for the AZ *.xxxx.
 ```
 
 Ta-daaaan. You will be able to see your topics from your browser. That's amazing.
+
+
+![Screenshot] (https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/Topics_visible.png)
