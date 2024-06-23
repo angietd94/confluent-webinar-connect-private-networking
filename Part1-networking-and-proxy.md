@@ -2,7 +2,8 @@
 
 This part follows what stated in https://docs.confluent.io/cloud/current/networking/ccloud-console-access.html.
 In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
-- [**<span style="color:orange">AWS</span>**] Create a new VPC if you want to start from scratch. I will strongly suggest you the enhanced creationn setting because in this way it will create all the possible private and public subnets with Internet Gateway with Route Table automatically.
+- [**<span style="color:orange">AWS</span>**]  $${\color{blue}Blue}$$	
+ Create a new VPC if you want to start from scratch. I will strongly suggest you the enhanced creationn setting because in this way it will create all the possible private and public subnets with Internet Gateway with Route Table automatically.
 - [**<span style="color:rgb(0,0,255)">Confluent Cloud</span>**]
  Inside an environment, create a new network in the region that you want. Select Private Link as networking type.
 - [**<span style="color:rgb(0,0,255)">Confluent Cloud</span>**] Create inside your CC VPC, a PrivateLink Access. Save that com.amazonaws.vpce.<region>.xxxxxx name for later. It will take time.
