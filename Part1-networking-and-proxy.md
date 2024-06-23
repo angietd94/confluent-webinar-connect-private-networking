@@ -5,7 +5,9 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
 - [**<span style="color:orange">AWS</span>**]  
   - Create a new VPC if you want to start from scratch. I will strongly suggest you the enhanced creationn setting because in this way it will create all the possible private and public subnets with Internet Gateway with Route Table automatically.
  I strongly suggest you to create VPC this way in order to have all subnet and the Internet Gateway already created.
-  ![Screenshot]((https://github.com/angietd94/confluent-webinar-connect-private networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png)
+
+  ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
+
 - [**Confluent Cloud**]
   - Inside an environment, create a new network in the region that you want. Select Private Link as networking type.
  
