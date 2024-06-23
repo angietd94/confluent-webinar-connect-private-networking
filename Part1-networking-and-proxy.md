@@ -12,22 +12,22 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
 
 - [AWS-EC2] Setup NGINX Proxy on EC2 Instance: This will act as a gateway for your local machine to connect to Confluent Cloud through the PrivateLink.
 
-'''
+```
 sudo apt update
 sudo apt install nginx
 nginx -t
 sudo apt-get install net-tools
 sudo apt -y install libnginx-mod-stream
 sudo vi /etc/nginx/nginx.conf # to resolve the route 53 hosted zones we created earlier.
-'''
+```
 Depending on your cloud provider, reconfigure to use the cloud provider’s resolver:
-'''
+```
 For AWS: resolver 169.254.169.253
 For Azure: resolver 168.63.129.16
 For Google Cloud: resolver 169.254.169.254
-'''
+```
 Here, we use AWS.
-'''
+```
 stream {
   map $ssl_preread_server_name $targetBackend {
      default $ssl_preread_server_name;
@@ -57,12 +57,12 @@ stream {
    ssl_preread on;
  }
 }
-'''
+```
 Then closing the text editor:
-'''
+```
 sudo systemctl restart nginx
 sudo systemctl status nginx
-'''
+```
 Now we need a final step but we will do it later!
 
 
@@ -101,8 +101,8 @@ Zonal endpoint record for the AZ *.xxxx.
 - [From your computer] Open sudo vi /etc/hosts.
 
   Add a line with:
-  '''
+```
   <Public-IP-of-your-bastion-host> <Bootstrap-of-the-cluster> #without any port so no :9092, no :443.
-'''
+```
 
 Ta-daaaan. You will be able to see your topics from your browser. That's amazing.
