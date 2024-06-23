@@ -12,6 +12,8 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
  ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_new_network.png)
   - Create inside your CC VPC, a PrivateLink Access. Save that com.amazonaws.vpce.<region>.xxxxxx name for later. It will take time.
   - Create a Dedicated Cluster inside that CC VPC.
+    When finished you will have access to the boostrap link. We will need it a lot today.
+    ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/bootstrap.png)
 - [**<span style="color:orange">AWS</span>**]
   - Create an EC2 Instance, that will work as a bastion host for us here, it will have NGINX installed insided.
 
@@ -63,6 +65,9 @@ stream {
  }
 }
 ```
+It will look like this more or less:
+
+![Screenshot] ( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/nginx_conf.png )
 Then closing the text editor:
 ```
 sudo systemctl restart nginx
@@ -77,19 +82,20 @@ Now we need a final step but we will do it later!
 
 
 
-      - Create VPC Endpoint
+  - Create VPC Endpoint
   - Configure Security Groups
  Security groups act like virtual firewalls around your AWS resources. Configuring them ensures only authorized data traffic can pass through the VPC endpoint to and from Confluent Cloud.
 By adjusting security group rules, you specify which types of data traffic (like emails or file transfers) are allowed to travel between your AWS network and Confluent Cloud through the private VPC endpoint. This tight control improves network security by blocking unauthorized access attempts.
 
 Open to your VPC CIDR, for example 10.0.0.0/16, the ports 9092, 443 and 80.
     
-  - Update Route Table
+
 
    -  Create Private Hosted Zones in Route 53 - check each region with correct match
 Ok, now, this part is tricky and you need to be VERY careful. Please use the notepad.
   DNS (Domain Name System) resolution lets computers translate website names (like www.example.com) into IP addresses (like 192.0.2.1) that they can use to find each other on the internet.
 Enabling DNS resolution means your AWS network can translate Confluent Cloud's website names (like services.confluentcloud.com) into private IP addresses used only within your VPC. This ensures smooth communication between your VPC and Confluent Cloud, even if those IP addresses change.
+ ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/Hosted_zones_setup.png)
 Here you need to create a custom “private DNS zone” for the Confluent domain specified by the Confluent network
 Identify the DNS name or IP addresses of the interface endpoints and the DNS wilcarsd records that need to be created to point to each of the endpoints.
 Create wildcard CNAME records (AWS) or A records (for Azure). They take each zonal DNS subdomain and resolve it to a VPC endpoint.
@@ -109,6 +115,10 @@ Zonal endpoint record for the AZ *.xxxx.
 ```
   <Public-IP-of-your-bastion-host> <Bootstrap-of-the-cluster> #without any port so no :9092, no :443.
 ```
+In this way.
+
+
+![Screenshot] (https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/code_hosts.png))
 
 Ta-daaaan. You will be able to see your topics from your browser. That's amazing.
 
