@@ -4,9 +4,9 @@ This part follows what stated in https://docs.confluent.io/cloud/current/network
 In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
 - [**<span style="color:orange">AWS</span>**]  {\color{blue}Blue}
  Create a new VPC if you want to start from scratch. I will strongly suggest you the enhanced creationn setting because in this way it will create all the possible private and public subnets with Internet Gateway with Route Table automatically.
-- [{\color{blue}Confluent Cloud}]
+- [ {\color{blue}Confluent Cloud} ]
  Inside an environment, create a new network in the region that you want. Select Private Link as networking type.
-- [{\color{blue}Confluent Cloud}] Create inside your CC VPC, a PrivateLink Access. Save that com.amazonaws.vpce.<region>.xxxxxx name for later. It will take time.
+- [ {\color{blue}Confluent Cloud} ] Create inside your CC VPC, a PrivateLink Access. Save that com.amazonaws.vpce.<region>.xxxxxx name for later. It will take time.
 - [**<span style="color:orange">AWS</span>**] Create an EC2 Instance, that will work as a bastion host for us here, it will have NGINX installed inside.
 - [CC] Create a Dedicated Cluster inside that CC VPC.
 
