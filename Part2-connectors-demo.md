@@ -50,6 +50,16 @@ Ok, at this point we have our MySQL database, an S3 bucket and our Dedicated Clu
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/512e2f8a107246250d5092f2c5ddcb07a0ef1c5a/images/only_mysql_and_s3.png)
 ________
 
+### Create MySQL CDC Debezium V2 Connector
+
+If you see this, it is a really good sign:
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/ae7f6bc0a67a7a2ebae4de3cb83fc6d44b4fa99f/images/mysql_running.png)
+
+> Problems troubleshooting:
+>  - It might occur that you have this error
+>  - Or you can have this other error about needing binlog=ROW.
+>  - This is something you need to change in the Configuration parameters of your RDS. You will probably be attached to a default one, which cannot be changed. So you will need to create a  new one and set binlog_format=ROW. REMEMBER TO REBOOT THE RDS, or it won't apply. :wink:	
+  
 ### **Create an S3 Egress point in Confluent Cloud**
 
 This is extremely easy. In the CC network just click on Egress Endpoint and type the following.
