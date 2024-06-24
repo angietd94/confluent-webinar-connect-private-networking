@@ -52,12 +52,28 @@ ________
 
 ### Create MySQL CDC Debezium V2 Connector
 
+Finally! We can't create our amazing connectors.
+Go inside your cluster and then select Connectors > Add Connector > MySQL Debezium CDC Source V2
+This is the setup:
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5318c2a0b7168ad4ebfaf7e34bafe2d8268e1f65/images/debezium_creatiom.png)
+
+
+
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/3e301b08c9fa0249752cfcdca4c5fc721f31f0fa/debezium_setup.png)
+We select JSON as this is a relational database. The topic prefix is literally up to you.
+It will create the topics in the form of:
+```
+<your-prefix>.<db_name>.>table-name>
+```
+
 If you see this, it is a really good sign:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/ae7f6bc0a67a7a2ebae4de3cb83fc6d44b4fa99f/images/mysql_running.png)
 
 > Problems troubleshooting:
->  - It might occur that you have this error
->  - Or you can have this other error about needing binlog=ROW.
+> It might occur that you have this error and is really probable that is because your RDS is not reachable. Try to nslookup <the-rds-endpoint> to check if it give an IP. This IP should be public. Or check the Security Groups.
+> ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c86e7b32285b1af0df187ed3454565dbbdef44c2/images/debezium_connector_Error.png)
+> Or you can have this other error about needing binlog=ROW. As this:
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5bacea33e5f4e19f285591430173f91793062592/images/row_error_!.png)
 >  - This is something you need to change in the Configuration parameters of your RDS. You will probably be attached to a default one, which cannot be changed. So you will need to create a  new one and set binlog_format=ROW. REMEMBER TO REBOOT THE RDS, or it won't apply. :wink:	
   
 ### **Create an S3 Egress point in Confluent Cloud**
