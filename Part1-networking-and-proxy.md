@@ -34,8 +34,8 @@ By adjusting security group rules, you specify which types of data traffic (like
 Open to your VPC CIDR, for example 10.0.0.0/16, the ports 9092, 443 and 80.
     
 
-   - ** Create Private Hosted Zones in Route 53 ** - _check each region with correct match_
-   - 
+   - **Create Private Hosted Zones in Route 53** - _check each region with correct match_
+
 Ok, now, this part is tricky and you need to be VERY careful. Please use the notepad.
   DNS (Domain Name System) resolution lets computers translate website names (like www.example.com) into IP addresses (like 192.0.2.1) that they can use to find each other on the internet.
 Enabling DNS resolution means your AWS network can translate Confluent Cloud's website names (like services.confluentcloud.com) into private IP addresses used only within your VPC. This ensures smooth communication between your VPC and Confluent Cloud, even if those IP addresses change.
