@@ -7,7 +7,17 @@ This is the setup we will mount:
 
 _From this picture you would see S3 all alone in a corner. I dediced to picture it this way as S3 as a PaaS service, fully managed by AWS, lives outside of any custom VPC. For security reasons you should make it accessible only from your VPC with VPC Endpoints if the content you are going to store on S3 musn't be available from the public Internet, so this is what we are trying here._ _More info at https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html._
 
+______
 
+# Some beloved theory in simple words:
+
+When we talk about connecting Confluent Cloud to Amazon S3, we have two main ways to do it securely: VPC endpoints and S3 egress endpoints.
+
+**VPC Endpoint for S3:** Imagine you have a private network (VPC) on AWS where your services like EC2 or databases reside. Normally, if they need to access S3 (where you store data), they would have to go through the public internet, which isn't ideal for security. A VPC endpoint acts like a private tunnel that lets these services access S3 directly, without ever leaving your secure VPC. It's like having a private road just for your AWS services to reach S3, keeping everything safe and private.
+
+**S3 Egress Endpoint:** Now, let's say you're using Confluent Cloud, which might not be in the same AWS VPC as your S3 buckets. When Confluent Cloud needs to write data to S3 securely, it uses an S3 egress endpoint. This endpoint creates a secure connection from Confluent Cloud's environment directly to your S3 bucket, even if they're in different places. It's like setting up a secure delivery service specifically for Confluent Cloud to safely send data to your S3 storage, without any detours through the public internet.
+
+In essence, both VPC endpoints and S3 egress endpoints ensure that your data travels safely and privately between your services and S3, maintaining high security standards without exposing your information to the risks of the public internet.
 _______
 > _Preliminary Notes :_
 > - _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs. _
