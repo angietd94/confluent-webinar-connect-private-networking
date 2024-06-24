@@ -11,7 +11,7 @@ Preliminary Notes :
 - _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
 - You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent.
 ___________
-
+##**Create the AWS infrastructure**
 ### **Create a MySQL database**
 First we create a MySQL database inside the RDS service of AWS
 When creating the database please select MySQL as it is the example we are touching here.
@@ -38,13 +38,16 @@ mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask 
 
 Note: you can also see from the UI the content of your database with some magic, for example by using PhpMyAdmin in Ubuntu or Adminer in CentOs.
 
-________
+
 ### **Create an S3 Bucket**
 
 Select your region and the name you prefer.
 Select the Access to be blocked from the outside as we want to take advanged of Private Link here.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5a258b2727bc5d801bd35ad2ad7fade560b9117b/images/bucket_block.png)
 
+
+Ok, at this point we have our MySQL database, an S3 bucket and our Dedicated Cluster all alone in the AWS world, but how to connect them?
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/512e2f8a107246250d5092f2c5ddcb07a0ef1c5a/images/only_mysql_and_s3.png)
 ________
 
 ### **Create an S3 Egress point in Confluent Cloud**
