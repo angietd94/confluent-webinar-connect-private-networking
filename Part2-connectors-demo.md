@@ -18,8 +18,7 @@ When creating the database please select MySQL as it is the example we are touch
 Also dset Credential Management as Self Managed, in order to choose your own password. Save this password as we will need it later.
 First we create some mock data with a Python script that goes inside the MySQL database (which is an RDS instance).
 
-![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/select_rds_database.png){:height="10%" width="10%"}
-
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/select_rds_database.png)
 
 Remember, to access the EC2 Bastion we created before, this is the command, or if possible just from the Connect AWS button:
 ```
@@ -27,10 +26,10 @@ ssh -i "<my-pem>.pem" ec2-user@ec2-xx-xxx-xxx-xxx.eu-west-1.compute.amazonaws.co
 ```
 _Of course, you will need install in your instance all the MySQL and Python stuff. Remember that Amazon Linux EC2 = CentOs._
 I will give some external documentations for this:
-- https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
-- https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
-- https://phoenixnap.com/kb/how-to-install-python-3-ubuntu
-- https://www.liquidweb.com/kb/how-to-install-python-3-on-centos-7/
+- [How to install MySQL on CentOS](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7)
+- [How to install Python on CentOs](https://www.liquidweb.com/kb/how-to-install-python-3-on-centos-7/)
+- [How to install MySQL on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04)
+- [How to install Python on Ubuntu](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu)
   
 Then we can access the inside of the database:
 ```
