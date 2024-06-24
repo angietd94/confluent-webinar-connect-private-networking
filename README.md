@@ -28,4 +28,4 @@ Some theory: as the Dedicated cluster is inside a VPC (private), if you want to 
 ## Phase 2: We will mount the actual connect demo
 - https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/main/Part2-connectors-demo.md 
 
-- ![screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/3577fc6387dd30cd4aef9d906c536714bc038d9a/images/demo-schema.png)
+- ![screenshot]((https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c929dee23ac648d93b1887e816ee599eae4d041d/images/demo-schema.png))
