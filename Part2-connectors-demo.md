@@ -23,7 +23,8 @@ _______
 > _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs._
 > _You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent._
 ___________
-#**Create the AWS infrastructure**
+
+# **Create the AWS infrastructure**
 ## **Create a MySQL database and fill it with data**
 First we create a MySQL database inside the RDS service of AWS
 When creating the database please select MySQL as it is the example we are touching here.
@@ -70,6 +71,7 @@ Select the Access to be blocked from the outside as we want to take advanged of 
 Ok, at this point we have our MySQL database, an S3 bucket and our Dedicated Cluster all alone in the AWS world, but how to connect them?
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/512e2f8a107246250d5092f2c5ddcb07a0ef1c5a/images/only_mysql_and_s3.png)
 ________
+ 
 # Inside Confluent Cloud...
 ## Create MySQL CDC Debezium V2 Connector
 
