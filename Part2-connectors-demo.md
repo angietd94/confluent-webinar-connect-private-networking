@@ -4,8 +4,7 @@ Here the idea is to take advantage of Confluent fully managed connectors, Debezi
 _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
 
 This is the setup we will mount:
-- ![screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/3577fc6387dd30cd4aef9d906c536714bc038d9a/images/demo-schema.png)
-
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c929dee23ac648d93b1887e816ee599eae4d041d/images/demo-schema.png)
 
 
 - **Create a MySQL database**
@@ -22,7 +21,13 @@ ssh -i "<my-pem>.pem" ec2-user@ec2-xx-xxx-xxx-xxx.eu-west-1.compute.amazonaws.co
 mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p (and it will ask for your password here).
 - **Create an S3 Bucket**
 
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3linklogo.png)
+
 - **Create an S3 Egress point in Confluent Cloud**
+
+![Create_egress_point_s3 image](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/creating_s3_egress_point.png)
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3_access_point1.png)
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3_access_point2.png)
 - **Create an S3 Sink Connector**
 - Now we have the easiest part, just create our S3 Sink connector. Select the topic you want to insert there, the usual API Key.
 - image s3linklogo
