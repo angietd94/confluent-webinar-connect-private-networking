@@ -33,9 +33,9 @@ I will give some external documentations for this:
 - [How to install MySQL on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04)
 - [How to install Python on Ubuntu](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu)
   
-Then we can access the inside of the database:f
+Then we can access the inside of the database _(and it will ask for your password here after pressing the command)_ :
 ```
-mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask for your password here)
+mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p 
 ```
 
 Note: you can also see from the UI the content of your database with some magic, for example by using PhpMyAdmin in Ubuntu or Adminer in CentOs.
