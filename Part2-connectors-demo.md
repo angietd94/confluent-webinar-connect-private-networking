@@ -18,7 +18,7 @@ When creating the database please select MySQL as it is the example we are touch
 Also dset Credential Management as Self Managed, in order to choose your own password. Save this password as we will need it later.
 First we create some mock data with a Python script that goes inside the MySQL database (which is an RDS instance).
 
-![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/select_rds_database.png)
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/select_rds_database.png/image.png=250x)
 
 
 Remember, to access the EC2 Bastion we created before, this is the command, or if possible just from the Connect AWS button:
