@@ -13,15 +13,15 @@ ______
 
 When we talk about connecting Confluent Cloud to Amazon S3, we have two main ways to do it securely: VPC endpoints and S3 egress endpoints.
 
-**VPC Endpoint for S3:** Imagine you have a private network (VPC) on AWS where your services like EC2 or databases reside. Normally, if they need to access S3 (where you store data), they would have to go through the public internet, which isn't ideal for security. A VPC endpoint acts like a private tunnel that lets these services access S3 directly, without ever leaving your secure VPC. It's like having a private road just for your AWS services to reach S3, keeping everything safe and private.
+- **VPC Endpoint for S3:** Imagine you have a private network (VPC) on AWS where your services like EC2 or databases reside. Normally, if they need to access S3 (where you store data), they would have to go through the public internet, which isn't ideal for security. A VPC endpoint acts like a private tunnel that lets these services access S3 directly, without ever leaving your secure VPC. It's like having a private road just for your AWS services to reach S3, keeping everything safe and private.
 
-**S3 Egress Endpoint:** Now, let's say you're using Confluent Cloud, which might not be in the same AWS VPC as your S3 buckets. When Confluent Cloud needs to write data to S3 securely, it uses an S3 egress endpoint. This endpoint creates a secure connection from Confluent Cloud's environment directly to your S3 bucket, even if they're in different places. It's like setting up a secure delivery service specifically for Confluent Cloud to safely send data to your S3 storage, without any detours through the public internet.
+- **S3 Egress Endpoint:** Now, let's say you're using Confluent Cloud, which might not be in the same AWS VPC as your S3 buckets. When Confluent Cloud needs to write data to S3 securely, it uses an S3 egress endpoint. This endpoint creates a secure connection from Confluent Cloud's environment directly to your S3 bucket, even if they're in different places. It's like setting up a secure delivery service specifically for Confluent Cloud to safely send data to your S3 storage, without any detours through the public internet.
 
 In essence, both VPC endpoints and S3 egress endpoints ensure that your data travels safely and privately between your services and S3, maintaining high security standards without exposing your information to the risks of the public internet.
 _______
 > _Preliminary Notes :_
-> - _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs. _
-> - You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent.
+> _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs._
+> _You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent._
 ___________
 #**Create the AWS infrastructure**
 ## **Create a MySQL database and fill it with data**
