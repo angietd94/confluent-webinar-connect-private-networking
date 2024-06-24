@@ -1,7 +1,12 @@
 # Part 2: Demo with Confluent Connectors
 
 Here the idea is to take advantage of Confluent fully managed connectors, Debezium V2 Source and S3 Sink, using Private link.
-Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service.
+_Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
+
+This is the setup we will mount:
+- ![screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/3577fc6387dd30cd4aef9d906c536714bc038d9a/images/demo-schema.png)
+
+
 
 - **Create a MySQL database**
 First we create a MySQL database inside the RDS service of AWS
