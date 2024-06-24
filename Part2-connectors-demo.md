@@ -109,15 +109,14 @@ You will the configuration here:
 
 For the store URL, we need the code we had in the Egress access point and add it to
   ```
-  https://bucket.<what-we-copied>
+  https://bucket.<the-so-called-Service-inside-our-S3-egress endpoint-vpce-.........>
   ```
 
-
-- Bucket name is just the one you decided.
+Bucket name is just the one you decided. Just its name.
   
 ______
 Now check what you see in S3.
 You should be seeing a folder created with inside the JSONs of the messages that passed through that topic.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/a710c0cb30f41dc74d87635c94e77b540e50b46c/images/s3_topics.png)
 
-Thank you for reading till here! :sparkling_heart:	
+**Thank you for reading till here! ** :sparkling_heart:	
