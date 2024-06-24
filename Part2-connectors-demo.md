@@ -7,12 +7,14 @@ This is the setup we will mount:
 
 _From this picture you would see S3 all alone in a corner. I dediced to picture it this way as S3 as a PaaS service, fully managed by AWS, lives outside of any custom VPC. For security reasons you should make it accessible only from your VPC with VPC Endpoints if the content you are going to store on S3 musn't be available from the public Internet, so this is what we are trying here._ _More info at https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html._
 
-Preliminary Notes :
-- _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs. _
-- You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent.
+
+_______
+> _Preliminary Notes :_
+> - _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs. _
+> - You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent.
 ___________
-##**Create the AWS infrastructure**
-### **Create a MySQL database**
+#**Create the AWS infrastructure**
+## **Create a MySQL database**
 First we create a MySQL database inside the RDS service of AWS
 When creating the database please select MySQL as it is the example we are touching here.
 Also dset Credential Management as Self Managed, in order to choose your own password. Save this password as we will need it later.
@@ -38,9 +40,14 @@ mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask 
 
 Note: you can also see from the UI the content of your database with some magic, for example by using PhpMyAdmin in Ubuntu or Adminer in CentOs.
 
+I filled the MySQL data with random data created by a Python code. I have attached here in the repo. Change the values of the database to yours.
+If you want to run it, you already know: 
+```
+sudo vi mysql-python-script.py #copy my code in here, you can also use nano or others, I like vi. :see_no_evil:	
+python3 mysql-python-script.py
+```
 
-### **Create an S3 Bucket**
-
+## **Create an S3 Bucket**
 Select your region and the name you prefer.
 Select the Access to be blocked from the outside as we want to take advanged of Private Link here.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5a258b2727bc5d801bd35ad2ad7fade560b9117b/images/bucket_block.png)
@@ -49,8 +56,8 @@ Select the Access to be blocked from the outside as we want to take advanged of 
 Ok, at this point we have our MySQL database, an S3 bucket and our Dedicated Cluster all alone in the AWS world, but how to connect them?
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/512e2f8a107246250d5092f2c5ddcb07a0ef1c5a/images/only_mysql_and_s3.png)
 ________
-
-### Create MySQL CDC Debezium V2 Connector
+# Inside Confluent Cloud...
+## Create MySQL CDC Debezium V2 Connector
 
 Finally! We can't create our amazing connectors.
 Go inside your cluster and then select   ```Connectors > Add Connector > MySQL Debezium CDC Source V2 ```.
@@ -77,7 +84,7 @@ If you see this, it is a really good sign:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5bacea33e5f4e19f285591430173f91793062592/images/row_error_!.png)
 > This is something you need to change in the Configuration parameters of your RDS. You will probably be attached to a default one, which cannot be changed. Go in   ```RDS instance > Configuration > DB instance parameter group  ``` and check it. So you will need to create a  new one and set   ```binlog_format=ROW  ```. REMEMBER TO REBOOT THE RDS, or it won't apply. :wink:	
   
-### **Create an S3 Egress point in Confluent Cloud**
+## **Create an S3 Egress point in Confluent Cloud**
 
 This is extremely easy. In the CC network just click on Egress Endpoint and type the following.
 ![Create_egress_point_s3 image](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/creating_s3_egress_point.png)
@@ -86,8 +93,6 @@ This is extremely easy. In the CC network just click on Egress Endpoint and type
 This is what you should see when created. Consider that this "VPC endpoint DNS name" will be then needed to create the S3 Sink connector.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/s3_egress_point.png)
 
-
-________
 
 
 ### **Create an S3 Sink Connector**
@@ -106,3 +111,9 @@ For the store URL, we need the code we had in the Egress access point and add it
 
 - Bucket name is just the one you decided.
   
+______
+Now check what you see in S3.
+You should be seeing a folder created with inside the JSONs of the messages that passed through that topic.
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/a710c0cb30f41dc74d87635c94e77b540e50b46c/images/s3_topics.png)
+
+Thank you for reading till here! :sparkling_heart:	
