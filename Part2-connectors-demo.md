@@ -10,8 +10,9 @@ _From this picture you would see S3 all alone in a corner. I dediced to picture 
 Preliminary Notes :
 - _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
 - You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent.
+___________
 
-- **Create a MySQL database**
+### **Create a MySQL database**
 First we create a MySQL database inside the RDS service of AWS
 When creating the database please select MySQL as it is the example we are touching here.
 Also dset Credential Management as Self Managed, in order to choose your own password. Save this password as we will need it later.
@@ -28,14 +29,14 @@ Then we can access the inside of the database:
 ```
 mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask for your password here)
 ```
-- **Create an S3 Bucket**
+### **Create an S3 Bucket**
 
 Select your region and the name you prefer.
 Select the Access to be blocked from the outside as we want to take advanged of Private Link here.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5a258b2727bc5d801bd35ad2ad7fade560b9117b/images/bucket_block.png)
 
 
-- **Create an S3 Egress point in Confluent Cloud**
+### **Create an S3 Egress point in Confluent Cloud**
 
 ![Create_egress_point_s3 image](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/creating_s3_egress_point.png)
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3_access_point1.png)
@@ -45,7 +46,7 @@ This is what you should see when created. Consider that this "VPC endpoint DNS n
 
 
 
-- **Create an S3 Sink Connector**
+### **Create an S3 Sink Connector**
 Now we have the easiest part, just create our S3 Sink connector. Select the topic you want to insert there, the usual API Key.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3linklogo.png)
 
