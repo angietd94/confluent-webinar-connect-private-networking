@@ -92,7 +92,7 @@ It will create the topics in the form of:
 If you see this, it is a really good sign:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/1a1b6d5c0741eab3c60cc8a09f75923092d94928/images/debezium_working_estrecho.png)
 
-> Problems troubleshooting:
+> ###Problems troubleshooting:
 > 
 > It might occur that you have this error and is really probable that is because your RDS is not reachable. Try to nslookup <the-rds-endpoint> to check if it give an IP. This IP should be public. Or check the Security Groups.
 > ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c86e7b32285b1af0df187ed3454565dbbdef44c2/images/debezium_connector_Error.png)
