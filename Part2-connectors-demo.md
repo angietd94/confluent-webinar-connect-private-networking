@@ -40,10 +40,10 @@ mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask 
 
 Note: you can also see from the UI the content of your database with some magic, for example by using PhpMyAdmin in Ubuntu or Adminer in CentOs.
 
-I filled the MySQL data with random data created by [a Python code](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/main/mysql-python-script.py). I have attached here in the repo. Change the values of the database to yours.
+I filled the MySQL data with random data created by [a Python code](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/main/mysql-python-script.py). I have attached here in the repo. Change the values of the database to yours. You can also use nano or others, I like vi. :see_no_evil:	. Please feel free to change this code, it is just an example!
 If you want to run it, you already know: 
 ```
-sudo vi mysql-python-script.py #copy my code in here, you can also use nano or others, I like vi. :see_no_evil:	
+sudo vi mysql-python-script.py #copy my code in here,
 python3 mysql-python-script.py
 ```
 
