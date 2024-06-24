@@ -13,12 +13,17 @@ When creating the database please select MySQL as it is the example we are touch
 Also dset Credential Management as Self Managed, in order to choose your own password. Save this password as we will need it later.
 First we create some mock data with a Python script that goes inside the MySQL database (which is an RDS instance).
 
-image select_rds_database
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/select_rds_database.png)
 
+
+Remember, to access the EC2 Bastion we created before, this is the command, or if possible just from the Connect AWS button:
+```
 ssh -i "<my-pem>.pem" ec2-user@ec2-xx-xxx-xxx-xxx.eu-west-1.compute.amazonaws.com
-
-
-mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p (and it will ask for your password here).
+```
+Then we can access the inside of the database:
+```
+mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask for your password here)
+```
 - **Create an S3 Bucket**
 
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3linklogo.png)
@@ -27,11 +32,15 @@ mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p (and it will ask fo
 
 ![Create_egress_point_s3 image](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/creating_s3_egress_point.png)
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3_access_point1.png)
-![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3_access_point2.png)
+
+This is what you should see when created. Consider that this "VPC endpoint DNS name" will be then needed to create the S3 Sink connector.
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/s3_egress_point.png)
 - **Create an S3 Sink Connector**
 - Now we have the easiest part, just create our S3 Sink connector. Select the topic you want to insert there, the usual API Key.
 - image s3linklogo
 - For the store URL, we need the code we had in the Egress access point and add it to
-- httpz://bucket.<what-we-copied>
-Bucket name is just the one you decided.
+  ```
+  https://bucket.<what-we-copied>
+  ```
+- Bucket name is just the one you decided.
 - 
