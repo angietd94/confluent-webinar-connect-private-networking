@@ -1,10 +1,12 @@
 # Part 2: Demo with Confluent Connectors
 
 Here the idea is to take advantage of Confluent fully managed connectors, Debezium V2 Source and S3 Sink, using Private link.
-_Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
 
 This is the setup we will mount:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c929dee23ac648d93b1887e816ee599eae4d041d/images/demo-schema.png)
+
+_From this picture you would see S3 all alone in a corner. I dediced to picture it this way as S3 as a PaaS service, fully managed by AWS, lives outside of any custom VPC. For security reasons you should make it accessible only from your VPC with VPC Endpoints if the content you are going to store on S3 musn't be available from the public Internet, so this is what we are trying here._ _More info at https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html._
+_Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
 
 
 - **Create a MySQL database**
