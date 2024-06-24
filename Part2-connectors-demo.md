@@ -25,25 +25,40 @@ Remember, to access the EC2 Bastion we created before, this is the command, or i
 ```
 ssh -i "<my-pem>.pem" ec2-user@ec2-xx-xxx-xxx-xxx.eu-west-1.compute.amazonaws.com
 ```
+_Of course, you will need install in your instance all the MySQL and Python stuff. Remember that Amazon Linux EC2 = CentOs._
+I will give some external documentations for this:
+- https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
+- https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
+- https://phoenixnap.com/kb/how-to-install-python-3-ubuntu
+- https://www.liquidweb.com/kb/how-to-install-python-3-on-centos-7/
+  
 Then we can access the inside of the database:
 ```
 mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p # (and it will ask for your password here)
 ```
+
+Note: you can also see from the UI the content of your database with some magic, for example by using PhpMyAdmin in Ubuntu or Adminer in CentOs.
+
+________
 ### **Create an S3 Bucket**
 
 Select your region and the name you prefer.
 Select the Access to be blocked from the outside as we want to take advanged of Private Link here.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5a258b2727bc5d801bd35ad2ad7fade560b9117b/images/bucket_block.png)
 
+________
 
 ### **Create an S3 Egress point in Confluent Cloud**
 
+This is extremely easy. In the CC network just click on Egress Endpoint and type the following.
 ![Create_egress_point_s3 image](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/creating_s3_egress_point.png)
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/c528c6f05d869e2146a93c7510e8b82c46520f6a/images/s3_access_point1.png)
 
 This is what you should see when created. Consider that this "VPC endpoint DNS name" will be then needed to create the S3 Sink connector.
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7db0f8af95039a71498d167be52113c5ecc2cf03/images/s3_egress_point.png)
 
+
+________
 
 
 ### **Create an S3 Sink Connector**
