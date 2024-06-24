@@ -8,7 +8,7 @@ This is the setup we will mount:
 _From this picture you would see S3 all alone in a corner. I dediced to picture it this way as S3 as a PaaS service, fully managed by AWS, lives outside of any custom VPC. For security reasons you should make it accessible only from your VPC with VPC Endpoints if the content you are going to store on S3 musn't be available from the public Internet, so this is what we are trying here._ _More info at https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html._
 
 Preliminary Notes :
-- _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service._
+- _Note: here you will need some AWS Keys, if you do not have them, create one in the IAM service. [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs. _
 - You will need some API Cluster Key. You can create in inside the UI of CC, inside your cluster, or using the CLI. It comes in a form key and password, save them as they are important everytime you need to create things in Confluent.
 ___________
 ##**Create the AWS infrastructure**
