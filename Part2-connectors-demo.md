@@ -22,7 +22,7 @@ When we talk about connecting Confluent Cloud to Amazon S3, we have two main way
 In essence, both VPC endpoints and S3 egress endpoints ensure that your data travels safely and privately between your services and S3, maintaining high security standards without exposing your information to the risks of the public internet.
 _______
 > _Preliminary Notes :_
-> _Ensure you have AWS credentials (Access Key and Secret Key) from IAM. If you don't have them, you can create them in the AWS Management Console._ [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs._
+> _Ensure you have AWS credentials (Access Key and Secret Key) from IAM. If you don't have them, you can create them in the AWS Management Console._ [Here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) is explained in the AWS docs.
 > _You'll also need an API Cluster Key for Confluent Cloud, which you can create through the UI of Confluent Cloud within your cluster settings or using the CLI. These credentials are essential for managing resources in Confluent._
 ___________
 
@@ -84,87 +84,16 @@ ________
 ## Create MySQL CDC Debezium V2 Connector
 
 Now, let's set up our connectors in Confluent Cloud:
-- Go inside your cluster and then select   ```Connectors > Add Connector > MySQL Debezium CDC Source V2 ```.
+- Navigate to your cluster and go to Connectors > Add Connector > MySQL Debezium CDC Source V2.
 - Configure the connector settings as shown:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5318c2a0b7168ad4ebfaf7e34bafe2d8268e1f65/images/debezium_creatiom.png)
-
-
-
-![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/3e301b08c9fa0249752cfcdca4c5fc721f31f0fa/debezium_setup.png)
-
-Certainly! Let's enhance your guide with detailed technical steps explained in simple terms for each part of the process:
-
-Part 2: Demo with Confluent Connectors
-In this setup, we'll utilize Confluent's fully managed connectors, specifically Debezium V2 Source and S3 Sink, leveraging AWS PrivateLink for enhanced security.
-
-Understanding the Setup
-Here's the schematic overview:
-
-
-In this diagram, S3 is shown separately because it's a fully managed service by AWS, residing outside any custom Virtual Private Cloud (VPC). For security reasons, we'll restrict access to S3 only from our VPC using VPC endpoints if the data shouldn't be accessible from the public internet. You can learn more about this setup here.
-
-Some Theory in Simple Terms:
-When connecting Confluent Cloud to Amazon S3 securely, we have two primary methods: VPC endpoints and S3 egress endpoints.
-
-VPC Endpoint for S3: Imagine your AWS services like EC2 instances or databases reside in a private network (VPC). Normally, to access S3 where your data is stored, they would need to go through the public internet, which poses security risks. A VPC endpoint acts like a private tunnel allowing these services to directly access S3 without leaving your secure VPC. It's akin to having a dedicated, secure route exclusively for your AWS services to reach S3, keeping your data safe and private.
-
-S3 Egress Endpoint: In the case of Confluent Cloud, which might not reside in the same AWS VPC as your S3 buckets, an S3 egress endpoint provides a secure connection from Confluent Cloud directly to your S3 bucket, even if they are in different locations. It establishes a secure delivery mechanism that enables Confluent Cloud to securely send data to your S3 storage without needing to traverse the public internet. This ensures data integrity and security throughout the transfer process.
-
-These endpoints ensure that your data moves securely and privately between Confluent Cloud and S3, maintaining stringent security measures without exposing sensitive information to the risks associated with the public internet.
-
-Preliminary Notes:
-
-Ensure you have AWS credentials (Access Key and Secret Key) from IAM. If you don't have them, you can create them in the AWS Management Console. Learn more here.
-You'll also need an API Cluster Key for Confluent Cloud, which you can create through the UI of Confluent Cloud within your cluster settings or using the CLI. These credentials are essential for managing resources in Confluent.
-Creating the AWS Infrastructure
-1. Create a MySQL Database and Populate it with Data
-First, we'll set up a MySQL database within AWS RDS (Relational Database Service):
-
-Choose MySQL as the database engine during setup.
-Opt for Self Managed credential management to set your own password for database access.
-Save this password securely as we'll need it later.
-To populate the database with sample data, use a Python script provided in the repository:
-
-Access your EC2 Bastion host using SSH, either through a command like ssh -i "<my-pem>.pem" ec2-user@ec2-xx-xxx-xxx-xxx.eu-west-1.compute.amazonaws.com or directly from the AWS Management Console.
-Install MySQL and Python dependencies on your EC2 instance. Note: Amazon Linux EC2 instances are similar to CentOS.
-For installation guidance:
-
-How to install MySQL on CentOS
-How to install Python on CentOS
-How to install MySQL on Ubuntu
-How to install Python on Ubuntu
-Once set up, connect to your MySQL database using the command:
-
-css
-Copy code
-mysql -h <my-rds-endpoint> -P 3306 -u your_mysql_username -p 
-Enter your password when prompted.
-
-You can also manage your database through graphical interfaces like PhpMyAdmin or Adminer:
-
-How to Install phpMyAdmin on Ubuntu
-Install phpMyAdmin on CentOS 7
-Creating an S3 Bucket
-Select your desired region and name for the S3 bucket. For enhanced security, configure access to be blocked from the outside, leveraging AWS PrivateLink:
-
-
-
-At this stage, you've set up your MySQL database, an S3 bucket, and your dedicated cluster in AWS. The next step is to establish connections between them.
-
-
-
-Inside Confluent Cloud...
-Creating a MySQL CDC Debezium V2 Connector
-Now, let's set up our connectors in Confluent Cloud:
-
-Navigate to your cluster and go to Connectors > Add Connector > MySQL Debezium CDC Source V2.
-Configure the connector settings as shown:
-
-
 Choose JSON as the data format for relational databases. You can set your preferred topic prefix, which organizes topics in the format ```<your-prefix>.<db_name>.>table-name>``` .
 
 Verify successful setup by checking if the connector is operational:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/1a1b6d5c0741eab3c60cc8a09f75923092d94928/images/debezium_working_estrecho.png)
+
+Certainly! Let's enhance your guide with detailed technical steps explained in simple terms for each part of the process:
+_________
 
 > **Problems troubleshooting:**
 > 
@@ -173,6 +102,7 @@ Verify successful setup by checking if the connector is operational:
 > Or you can have this other error about needing ```binlog_format=ROW  ```. As this:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/5bacea33e5f4e19f285591430173f91793062592/images/row_error_!.png)
 > This is something you need to change in the Configuration parameters of your RDS. You will probably be attached to a default one, which cannot be changed. Go in   ```RDS instance > Configuration > DB instance parameter group  ``` and check it. So you will need to create a  new one and set   ```binlog_format=ROW  ```. REMEMBER TO REBOOT THE RDS, or it won't apply. :wink:	
+  ________
   
 ## **Create an S3 Egress point in Confluent Cloud**
 
