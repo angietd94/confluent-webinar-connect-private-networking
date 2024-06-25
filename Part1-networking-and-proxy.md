@@ -1,8 +1,10 @@
 # Phase1: Configure a the CC Network and the Proxy
 
-This part follows what stated in https://docs.confluent.io/cloud/current/networking/ccloud-console-access.html.
-In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
+This part follows what stated in this documentation, [Use Confluent Cloud with Private Networking](https://docs.confluent.io/cloud/current/networking/ccloud-console-access.html). In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
+The following is the set we want to create here:
+![https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/ae64e83b2224dc67ca633ec89122fbe0e3c3602d/images/general_schema.png](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/3577fc6387dd30cd4aef9d906c536714bc038d9a/images/general_schema.png)
 
+_______
 ## **Inside Confluent Cloud**
   - **Create a CC Network**
   - Within your Confluent Cloud environment, create a new network in your desired region. Choose "Private Link" as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
