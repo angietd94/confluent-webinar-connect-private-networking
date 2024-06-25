@@ -6,7 +6,7 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
   - If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
   ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
 
-## [**Confluent Cloud**]
+## **Inside Confluent Cloud**
   - **Create a CC Network**
   - Within your Confluent Cloud environment, create a new network in your desired region. Choose "Private Link" as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
  
@@ -19,8 +19,8 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
     ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/bootstrap.png)
 - [**<span style="color:orange">AWS</span>**]
  
-
-## **[AWS-VPC]**
+__________
+## **AWS-VPC**
   - **Setup VPC Endoint in AWS**
         By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
     Since we are from Confluent, choose the Partner one here:
