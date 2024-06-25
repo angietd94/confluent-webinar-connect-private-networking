@@ -77,9 +77,10 @@ sudo apt update
 sudo apt install nginx
 nginx -t
 sudo apt-get install net-tools
-sudo apt -y install libnginx-mod-stream
+sudo apt -y install libnginx-mod-stream #this stream module is needed if not you will get an error.
 sudo vi /etc/nginx/nginx.conf # to resolve the route 53 hosted zones we created earlier.
 ```
+Some more info on this process [here](https://www.server-world.info/en/note?os=Ubuntu_22.04&p=nginx&f=12#google_vignette).
 Depending on your cloud provider, reconfigure to use the cloud provider’s resolver:
 ```
 For AWS: resolver 169.254.169.253
