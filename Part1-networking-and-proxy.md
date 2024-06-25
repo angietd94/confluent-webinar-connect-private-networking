@@ -32,29 +32,36 @@ __________
 If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
   ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
 
-  - **Setup VPC Endoint in AWS**
-By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
-    Since we are from Confluent, choose the Partner one here:
 
-    ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/f6dfba100159dc17e8c465541a22614823af061d/images/Create%20endpoint.png)
+
+- **Setup VPC Endoint in AWS**
+By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
+Since we are from Confluent, choose the Partner one here:
+
+
+
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/f6dfba100159dc17e8c465541a22614823af061d/images/Create%20endpoint.png)
+
+
+Save all of this data or keep it a open tab because we will need it for hosted zones.
     
-  - **Configure Security Groups**
+- **Configure Security Groups**
 Security groups act like virtual firewalls around your AWS resources. Configuring them ensures only authorized data traffic can pass through the VPC endpoint to and from Confluent Cloud.
 By adjusting security group rules, you specify which types of data traffic (like emails or file transfers) are allowed to travel between your AWS network and Confluent Cloud through the private VPC endpoint. This tight control improves network security by blocking unauthorized access attempts.
 
 Open to your VPC CIDR, for example 10.0.0.0/16, the ports 9092, 443 and 80.
-    
+In the end it will look like this:
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/e63aba60b173fabad30bd0ca060f5bd0a81c8117/images/vpc_endpoint_security_group.png)
 
-# **Create Private Hosted Zones in Route 53** - _check each region with correct match_
+## **Create Private Hosted Zones in Route 53** - 
+_check each region with correct match_
 
 Ok, now, this part is tricky and you need to be VERY careful. Please use the notepad.
-  DNS (Domain Name System) resolution lets computers translate website names (like www.example.com) into IP addresses (like 192.0.2.1) that they can use to find each other on the internet.
-  
-Enabling DNS resolution means your AWS network can translate Confluent Cloud's website names (like services.confluentcloud.com) into private IP addresses used only within your VPC. This ensures smooth communication between your VPC and Confluent Cloud, even if those IP addresses change.
+DNS (Domain Name System) resolution lets computers translate website names (like www.example.com) into IP addresses (like 192.0.2.1) that they can use to find each other on the internet. Enabling DNS resolution means your AWS network can translate Confluent Cloud's website names (like services.confluentcloud.com) into private IP addresses used only within your VPC. This ensures smooth communication between your VPC and Confluent Cloud, even if those IP addresses change.
 Here you need to create a custom “private DNS zone” for the Confluent domain specified by the Confluent network
 
 Identify the DNS name or IP addresses of the interface endpoints and the DNS wilcarsd records that need to be created to point to each of the endpoints.
-Create wildcard CNAME records (AWS) or A records (for Azure). They take each zonal DNS subdomain and resolve it to a VPC endpoint.
+Here you reate wildcard CNAME records (AWS) or A records (for Azure). They take each zonal DNS subdomain and resolve it to a VPC endpoint.
 Route 53 is AWS's service for managing DNS. Configuring “hosted zones” in Route 53 ensures that your AWS network can resolve (find) Confluent Cloud's services using their names internally, without relying on public internet DNS services.
 
 By setting up private hosted zones in Route 53, you make sure that any requests from your AWS network to find Confluent Cloud services are handled internally within AWS. This keeps your communications secure and compliant with privacy standards.
@@ -62,6 +69,16 @@ By setting up private hosted zones in Route 53, you make sure that any requests 
 DNS name of the CC cluster in the record name - private hosted zone.
 CNAME for the main VPC endpoint, that goes with a * only.
 Zonal endpoint record for the AZ *.xxxx.
+Going back to your VPC endpoint, make this connection in your head:
+![Screenshot]https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/07c7a9ac329af2850c60fb7ec55ee38ba72c24b9/matching.png)
+So you will add the following 4 records to your hosted zone (Record Type: Cname for everyone)
+1. Record name: *, Record Type: Cname, Value: the "general" DNS name
+2. Record name: *eu-west-1a (or whichever your AZ), Value its corrispondent DNS name
+3. Record name: *eu-west-1b (or whichever your AZ), Value its corrispondent DNS name
+4. Record name: *eu-west-1c (or whichever your AZ), Value its corrispondent DNS name
+
+   
+This is how it will look like:
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/Hosted_zones_setup.png)
 
 
