@@ -8,21 +8,25 @@ _______
 ## **Inside Confluent Cloud**
   - **Create a CC Network**
 
-Within your Confluent Cloud environment, create a new network in your desired region. Choose "Private Link" as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
+
+Within your Confluent Cloud environment, create a new network in your desired region. 
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/78a6e8d7294ebb96597d46cfd2110c1782ecba31/images/new_cc_network.png)
+
+Choose _Private Link_ as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
  
  ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_new_network.png)
   - **Create PrivateLink Access in CC VPC**
 
-Generate a **PrivateLink Access** in your Confluent Cloud VPC. Save the com.amazonaws.vpce.<ID> name for later use. This step establishes a private connection endpoint in AWS that Confluent Cloud can use securely.
+Generate a **PrivateLink Access** in your Confluent Cloud VPC. Save the ```com.amazonaws.vpce-xxxxx.<ID>``` name for later use. This step establishes a private connection endpoint in AWS that Confluent Cloud can use securely.
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/78a6e8d7294ebb96597d46cfd2110c1782ecba31/images/private_link_creation.png)
 
   - **Create a Dedicated Cluster** inside that CC VPC.
 Set up a Dedicated Cluster inside your Confluent Cloud VPC. Upon completion, note down the bootstrap link provided. This link is crucial for connecting your applications to Confluent Cloud securely.
 
 ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/bootstrap.png)
-- [**<span style="color:orange">AWS</span>**]
  
 __________
-## **AWS-VPC**
+## **AWS**
 
 - **Create a AWS VPC**
 If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
