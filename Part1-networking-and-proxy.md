@@ -2,9 +2,6 @@
 
 This part follows what stated in https://docs.confluent.io/cloud/current/networking/ccloud-console-access.html.
 In my own example, we will use NGINX as proxy, but you can also use other tools like HAProxy or Envoy.
-- [**<span style="color:orange">AWS</span>**]  
-  - If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
-  ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
 
 ## **Inside Confluent Cloud**
   - **Create a CC Network**
@@ -21,6 +18,10 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
  
 __________
 ## **AWS-VPC**
+- **Create a AWS VPC**
+  - If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
+  ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
+
   - **Setup VPC Endoint in AWS**
         By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
     Since we are from Confluent, choose the Partner one here:
