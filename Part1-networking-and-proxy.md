@@ -7,45 +7,52 @@ The following is the set we want to create here:
 _______
 ## **Inside Confluent Cloud**
   - **Create a CC Network**
-  - Within your Confluent Cloud environment, create a new network in your desired region. Choose "Private Link" as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
+
+Within your Confluent Cloud environment, create a new network in your desired region. Choose "Private Link" as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
  
  ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_new_network.png)
   - **Create PrivateLink Access in CC VPC**
-  - Generate a PrivateLink Access in your Confluent Cloud VPC. Save the com.amazonaws.vpce.<ID> name for later use. This step establishes a private connection endpoint in AWS that Confluent Cloud can use securely.
-  - **Create a Dedicated Cluster** inside that CC VPC.
-    Set up a Dedicated Cluster inside your Confluent Cloud VPC. Upon completion, note down the bootstrap link provided. This link is crucial for connecting your applications to Confluent Cloud securely.
 
-    ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/bootstrap.png)
+Generate a **PrivateLink Access** in your Confluent Cloud VPC. Save the com.amazonaws.vpce.<ID> name for later use. This step establishes a private connection endpoint in AWS that Confluent Cloud can use securely.
+
+  - **Create a Dedicated Cluster** inside that CC VPC.
+Set up a Dedicated Cluster inside your Confluent Cloud VPC. Upon completion, note down the bootstrap link provided. This link is crucial for connecting your applications to Confluent Cloud securely.
+
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/7166c30d2561fb28ae77f9f8367e841ff3327644/images/bootstrap.png)
 - [**<span style="color:orange">AWS</span>**]
  
 __________
 ## **AWS-VPC**
+
 - **Create a AWS VPC**
-  - If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
+If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
   ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
 
   - **Setup VPC Endoint in AWS**
-        By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
+By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
     Since we are from Confluent, choose the Partner one here:
 
     ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/f6dfba100159dc17e8c465541a22614823af061d/images/Create%20endpoint.png)
     
   - **Configure Security Groups**
- Security groups act like virtual firewalls around your AWS resources. Configuring them ensures only authorized data traffic can pass through the VPC endpoint to and from Confluent Cloud.
+Security groups act like virtual firewalls around your AWS resources. Configuring them ensures only authorized data traffic can pass through the VPC endpoint to and from Confluent Cloud.
 By adjusting security group rules, you specify which types of data traffic (like emails or file transfers) are allowed to travel between your AWS network and Confluent Cloud through the private VPC endpoint. This tight control improves network security by blocking unauthorized access attempts.
 
 Open to your VPC CIDR, for example 10.0.0.0/16, the ports 9092, 443 and 80.
     
 
-  # **Create Private Hosted Zones in Route 53** - _check each region with correct match_
+# **Create Private Hosted Zones in Route 53** - _check each region with correct match_
 
 Ok, now, this part is tricky and you need to be VERY careful. Please use the notepad.
   DNS (Domain Name System) resolution lets computers translate website names (like www.example.com) into IP addresses (like 192.0.2.1) that they can use to find each other on the internet.
+  
 Enabling DNS resolution means your AWS network can translate Confluent Cloud's website names (like services.confluentcloud.com) into private IP addresses used only within your VPC. This ensures smooth communication between your VPC and Confluent Cloud, even if those IP addresses change.
 Here you need to create a custom “private DNS zone” for the Confluent domain specified by the Confluent network
+
 Identify the DNS name or IP addresses of the interface endpoints and the DNS wilcarsd records that need to be created to point to each of the endpoints.
 Create wildcard CNAME records (AWS) or A records (for Azure). They take each zonal DNS subdomain and resolve it to a VPC endpoint.
 Route 53 is AWS's service for managing DNS. Configuring “hosted zones” in Route 53 ensures that your AWS network can resolve (find) Confluent Cloud's services using their names internally, without relying on public internet DNS services.
+
 By setting up private hosted zones in Route 53, you make sure that any requests from your AWS network to find Confluent Cloud services are handled internally within AWS. This keeps your communications secure and compliant with privacy standards.
 
 DNS name of the CC cluster in the record name - private hosted zone.
@@ -75,7 +82,8 @@ ____
 ## **Setup EC2 Instance as Bastion Host with NGINX**:
    
 Launch an EC2 Instance in AWS, configured as a bastion host. Install NGINX on this instance to act as a proxy gateway. NGINX will facilitate secure communication between your local machine and Confluent Cloud through the PrivateLink. You can connect to this EC2 in various forms, either from the connect button in the AWS UI, of if you have a keypair with SSH (in this case, please remember to check Security groups port 443). Important: Select for the EC2 to have a Public IP because we will need this.
- - Choose wether Amazon Linux or Ubuntu. In Amazon Linux is like a CentOs and Ubuntu is Linux so some commands may differ! But there is Google for that ;) 
+
+ - Choose wether Amazon Linux or Ubuntu. In Amazon Linux is like a CentOs and Ubuntu is Linux so some commands may differ! But there is Google for that ;)  Here is use Amazon Linux Free Tier.
 - [**<span style="color:orange">AWS-EC2</span>**] Setup NGINX Proxy on EC2 Instance: This will act as a gateway for your local machine to connect to Confluent Cloud through the PrivateLink.
 
 ```
