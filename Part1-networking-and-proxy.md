@@ -30,7 +30,8 @@ __________
 
 - **Create a AWS VPC**
 If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
-  ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
+
+  ![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png)
 
 
 
@@ -70,8 +71,10 @@ DNS name of the CC cluster in the record name - private hosted zone.
 CNAME for the main VPC endpoint, that goes with a * only.
 Zonal endpoint record for the AZ *.xxxx.
 Going back to your VPC endpoint, make this connection in your head:
-![Screenshot]https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/07c7a9ac329af2850c60fb7ec55ee38ba72c24b9/matching.png)
-So you will add the following 4 records to your hosted zone (Record Type: Cname for everyone)
+
+![Screenshot](https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/07c7a9ac329af2850c60fb7ec55ee38ba72c24b9/matching.png)
+
+So you will add the following 4 records to your hosted zone _(Record Type: CNAME for everyone)_
 1. Record name: *, Record Type: Cname, Value: the "general" DNS name
 2. Record name: *eu-west-1a (or whichever your AZ), Value its corrispondent DNS name
 3. Record name: *eu-west-1b (or whichever your AZ), Value its corrispondent DNS name
