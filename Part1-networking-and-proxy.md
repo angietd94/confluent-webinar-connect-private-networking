@@ -6,7 +6,7 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
   - If starting from scratch, use AWS's enhanced VPC creation settings. This automatically sets up private and public subnets with an Internet Gateway and Route Table. This setup ensures your network is well-structured and secure.
   ![Screenshot]( https://github.com/angietd94/confluent-webinar-connect-private-networking/blob/02d8e389d68c2ff5dcd2ea44df0e7331b5358b56/images/create_vpc_smartly.png )
 
-- [**Confluent Cloud**]
+## [**Confluent Cloud**]
   - **Create a CC Network**
   - Within your Confluent Cloud environment, create a new network in your desired region. Choose "Private Link" as the networking type. This network setup ensures secure and private communication between your resources in AWS and Confluent Cloud.
  
@@ -20,7 +20,7 @@ In my own example, we will use NGINX as proxy, but you can also use other tools 
 - [**<span style="color:orange">AWS</span>**]
  
 
-- **[AWS-VPC]**
+## **[AWS-VPC]**
   - **Setup VPC Endoint in AWS**
         By creating a VPC endpoint, AWS allocates a “special network interface” inside your VPC. This interface acts like a “private doorway” that only your VPC can use to reach Confluent Cloud. This keeps all data traffic between your VPC and Confluent Cloud inside the secure AWS network.
     Since we are from Confluent, choose the Partner one here:
@@ -34,7 +34,7 @@ By adjusting security group rules, you specify which types of data traffic (like
 Open to your VPC CIDR, for example 10.0.0.0/16, the ports 9092, 443 and 80.
     
 
-   - **Create Private Hosted Zones in Route 53** - _check each region with correct match_
+  # **Create Private Hosted Zones in Route 53** - _check each region with correct match_
 
 Ok, now, this part is tricky and you need to be VERY careful. Please use the notepad.
   DNS (Domain Name System) resolution lets computers translate website names (like www.example.com) into IP addresses (like 192.0.2.1) that they can use to find each other on the internet.
@@ -68,7 +68,10 @@ _**Private Hosted Zones**: These are used for internal DNS resolution within you
 _**Public Hosted Zones**: These are used for DNS resolution that is accessible from the public internet. They resolve domain names to public IP addresses that can be accessed globally. This is typically used for websites, APIs, and other services that need to be publicly available_
 
 ____
- - **Setup EC2 Instance as Bastion Host with NGINX**: Launch an EC2 Instance in AWS, configured as a bastion host. Install NGINX on this instance to act as a proxy gateway. NGINX will facilitate secure communication between your local machine and Confluent Cloud through the PrivateLink. You can connect to this EC2 in various forms, either from the connect button in the AWS UI, of if you have a keypair with SSH (in this case, please remember to check Security groups port 443). Important: Select for the EC2 to have a Public IP because we will need this.
+
+## **Setup EC2 Instance as Bastion Host with NGINX**:
+   
+Launch an EC2 Instance in AWS, configured as a bastion host. Install NGINX on this instance to act as a proxy gateway. NGINX will facilitate secure communication between your local machine and Confluent Cloud through the PrivateLink. You can connect to this EC2 in various forms, either from the connect button in the AWS UI, of if you have a keypair with SSH (in this case, please remember to check Security groups port 443). Important: Select for the EC2 to have a Public IP because we will need this.
  - Choose wether Amazon Linux or Ubuntu. In Amazon Linux is like a CentOs and Ubuntu is Linux so some commands may differ! But there is Google for that ;) 
 - [**<span style="color:orange">AWS-EC2</span>**] Setup NGINX Proxy on EC2 Instance: This will act as a gateway for your local machine to connect to Confluent Cloud through the PrivateLink.
 
